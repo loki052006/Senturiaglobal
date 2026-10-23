@@ -16,7 +16,7 @@ npm install
 copy .env.example .env   # Windows PowerShell; use cp .env.example .env on macOS/Linux
 npm start
 ```
-Set `SESSION_SECRET` to a long random value in `.env` before running, and set `GOOGLE_CLIENT_ID` if Google Sign-In is needed. Use Node.js 20 LTS (20.18+); newer Node versions may require Visual Studio C++ build tools for `better-sqlite3`.
+Set `SESSION_SECRET` to a long random value in `.env` before running, and set `GOOGLE_CLIENT_ID` if Google Sign-In is needed. Use Node.js 20 LTS; newer Node versions may require Visual Studio C++ build tools for `better-sqlite3`.
 Open http://localhost:3000. Users and intake requests are stored in `senturia.db`.
 For production: serve over HTTPS with NODE_ENV=production.
 
