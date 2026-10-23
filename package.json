@@ -1,0 +1,14 @@
+{
+  "name": "senturiaglobal",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "start": "node --env-file-if-exists=.env server.js" },
+  "engines": { "node": ">=20.18" },
+  "dependencies": {
+    "better-sqlite3": "^11.7.0",
+    "cookie-session": "^2.1.0",
+    "express": "^4.21.2",
+    "google-auth-library": "^9.15.0"
+  }
+}

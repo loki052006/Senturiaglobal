@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Senturiaglobal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#f8f8f6;--surface:#fff;--ink:#16202a;--mute:#5b6773;--line:#dde0e3;--accent:#0e5e63;--accent-ink:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#12171c;--surface:#1a2127;--ink:#e8ebed;--mute:#9aa5ae;--line:#2b343b;--accent:#5cb8bd;--accent-ink:#0b1417}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#12171c;--surface:#1a2127;--ink:#e8ebed;--mute:#9aa5ae;--line:#2b343b;--accent:#5cb8bd;--accent-ink:#0b1417}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:72px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 "Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+header .wrap{display:flex;align-items:center;gap:14px;height:60px}
+.logo{font-weight:700;font-size:18px;letter-spacing:-.01em;text-decoration:none;margin-right:auto}
+nav{display:flex;gap:14px;font-size:14px}
+nav a{text-decoration:none;color:var(--mute)}
+nav a:hover{color:var(--ink)}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);border:0;border-radius:6px;padding:10px 18px;font:600 15px inherit;font-family:inherit;text-decoration:none;cursor:pointer}
+.btn.ghost{background:none;color:var(--ink);border:1px solid var(--line)}
+.hero{padding:88px 0 72px}
+h1{font-size:clamp(34px,5.6vw,56px);line-height:1.08;letter-spacing:-.025em;font-weight:600;margin:0 0 20px;max-width:15em}
+.lead{font-size:19px;color:var(--mute);max-width:36em;margin:0 0 32px}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.facts{display:flex;gap:36px;flex-wrap:wrap;margin-top:56px;padding-top:24px;border-top:1px solid var(--line);color:var(--mute);font-size:15px}
+.facts b{display:block;color:var(--ink);font-weight:600}
+section{padding:64px 0;border-top:1px solid var(--line)}
+h2{font-size:30px;letter-spacing:-.02em;line-height:1.2;margin:0 0 10px;font-weight:600}
+.sub{color:var(--mute);margin:0 0 32px;max-width:38em}
+.tabs{display:flex;gap:4px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+.tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:10px 16px;margin-bottom:-1px;font:500 16px inherit;font-family:inherit;color:var(--mute);cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--accent)}
+.list{display:grid;grid-template-columns:repeat(2,1fr);gap:0 48px}
+.item{padding:18px 0;border-bottom:1px solid var(--line)}
+.item h3{margin:0 0 4px;font-size:17px;font-weight:600}
+.item p{margin:0;color:var(--mute);font-size:15px}
+[hidden]{display:none!important}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s}
+.steps li::before{content:counter(s);display:block;font-size:34px;font-weight:600;color:var(--accent);margin-bottom:8px}
+.steps h3{margin:0 0 6px;font-size:18px}
+.steps p{margin:0;color:var(--mute);font-size:15px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:28px}
+.panel h3{margin:0 0 8px;font-size:21px;font-weight:600}
+.panel p{color:var(--mute);margin:0 0 16px}
+.panel ol{margin:0 0 20px;padding-left:20px;color:var(--mute);font-size:15px}
+details{border-bottom:1px solid var(--line);padding:16px 0}
+summary{cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--mute);font-size:20px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin:10px 0 0;color:var(--mute);max-width:42em}
+form{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:640px}
+label{display:grid;gap:6px;font-size:14px;font-weight:500}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px;width:100%}
+.full{grid-column:1/-1}
+.ok{padding:20px;border:1px solid var(--accent);border-radius:8px;max-width:640px}
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--mute);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer p{margin:0 0 6px;max-width:34em}
+footer nav{flex-wrap:wrap;gap:8px 20px}
+.ic{display:grid;place-items:center;width:38px;height:38px;padding:0;background:none;border:1px solid var(--line);border-radius:6px;color:var(--ink);cursor:pointer}
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);padding:32px;width:min(400px,calc(100% - 32px));position:fixed}
+dialog::backdrop{background:rgba(10,14,18,.55)}
+dialog h2{font-size:22px}dialog .sub{margin-bottom:20px;font-size:15px}
+.x{position:absolute;top:10px;right:12px;background:none;border:0;color:var(--mute);font-size:24px;cursor:pointer;line-height:1}
+.gbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:11px 16px}
+#gbox{display:flex;justify-content:center}
+.note{font-size:13px;color:var(--mute);margin:14px 0 0;min-height:1.5em}
+.status{font-size:14px;margin:12px 0 0;color:var(--mute)}
+.status.error{color:#b42318}
+.status.success{color:var(--accent)}
+button:disabled{opacity:.65;cursor:wait}
+@media(max-width:760px){.hs{display:none}nav{display:none}.list,.steps,.two,form{grid-template-columns:1fr}.hero{padding:56px 0 48px}.tabs{overflow-x:auto}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<a class="logo" href="#top">Senturiaglobal</a>
+<nav><a href="#services">Services</a><a href="#process">How it works</a><a href="#help">IRS notices &amp; ITIN</a><a href="#members">Membership</a><a href="#faq">FAQ</a></nav>
+<button class="ic" id="th" aria-label="Switch between light and dark theme" title="Theme"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button>
+<button class="btn ghost" id="si">Sign in</button>
+<a class="btn hs" href="#start">Get a free draft</a>
+</div></header>
+
+<main id="top">
+<div class="wrap hero">
+<h1>US taxes for people who live across borders.</h1>
+<p class="lead">File your return online, get a free draft to review before you pay, and have a specialist on your side if the IRS ever writes back. Built for H-1B, L-1, F-1 and OPT holders, families, founders and growing companies.</p>
+<div class="row"><a class="btn" href="#start">Get a free draft</a><a class="btn ghost" href="#services">See all services</a></div>
+<div class="facts">
+<div><b>Free draft in 24 hours</b>once your documents are complete</div>
+<div><b>Online from any device</b>upload from your phone</div>
+<div><b>Reviewed by a specialist</b>before anything is filed</div>
+<div><b>Support all year</b>chat, email, phone and video</div>
+</div>
+</div>
+
+<section id="services"><div class="wrap">
+<h2>Services</h2>
+<p class="sub">Choose what you need. Everything is handled in one account, so your documents and history carry over from year to year.</p>
+<div class="tabs" role="tablist">
+<button role="tab" aria-selected="true" data-t="ind">Individuals</button>
+<button role="tab" aria-selected="false" data-t="biz">Businesses</button>
+<button role="tab" aria-selected="false" data-t="ent">Enterprise</button>
+</div>
+<div class="list" id="ind">
+<div class="item"><h3>Tax return preparation</h3><p>Federal and state returns for residents (1040) and non-residents (1040-NR), with a draft to review before filing.</p></div>
+<div class="item"><h3>E-filing</h3><p>Electronic filing where you’re eligible, with status updates until the return is accepted.</p></div>
+<div class="item"><h3>Past-year returns</h3><p>Catch up on up to three prior years if returns were missed or filed incorrectly.</p></div>
+<div class="item"><h3>Tax planning and advisory</h3><p>Year-round planning for withholding, W-4 changes, residency status, treaty benefits and retirement.</p></div>
+<div class="item"><h3>ITIN and Form W-7</h3><p>Application support from a Certifying Acceptance Agent, so you can keep your original ID documents.</p></div>
+<div class="item"><h3>FBAR and FATCA</h3><p>Reporting for foreign accounts and assets, including filings for earlier years.</p></div>
+<div class="item"><h3>Extensions</h3><p>Federal and state extensions to avoid late-filing penalties while you gather documents.</p></div>
+<div class="item"><h3>IRS representation</h3><p>Responses to notices, audit letters and follow-up questions, with multi-year support.</p></div>
+</div>
+<div class="list" id="biz" hidden>
+<div class="item"><h3>Business incorporation</h3><p>LLC, S-corp and C-corp setup with structure advice from day one.</p></div>
+<div class="item"><h3>Bookkeeping and accounting</h3><p>Monthly books, reconciliations and clear financial reports.</p></div>
+<div class="item"><h3>Payroll</h3><p>Payroll runs, correct withholding, deposits and quarterly filings.</p></div>
+<div class="item"><h3>Business tax returns</h3><p>Returns for LLCs, S-corps, partnerships and corporations, with projections before year end.</p></div>
+<div class="item"><h3>Entity planning</h3><p>Review of your structure as income, owners or states change.</p></div>
+<div class="item"><h3>Notice management</h3><p>Tracking and responding to notices from federal and state agencies.</p></div>
+</div>
+<div class="list" id="ent" hidden>
+<div class="item"><h3>Income tax</h3><p>Federal, state and international compliance and consulting.</p></div>
+<div class="item"><h3>Sales and use, and indirect tax</h3><p>Return preparation, e-filing and reconciliation across jurisdictions.</p></div>
+<div class="item"><h3>Property tax</h3><p>Bill verification, payment administration, refund processing and assessment notice tracking.</p></div>
+<div class="item"><h3>Employment tax</h3><p>Payroll tax compliance, credits and incentives.</p></div>
+<div class="item"><h3>Unclaimed property and transfer pricing</h3><p>Reporting, documentation and ongoing compliance.</p></div>
+<div class="item"><h3>Managed services</h3><p>An outsourced team that runs recurring filings and reports through a client portal.</p></div>
+</div>
+</div></section>
+
+<section id="process"><div class="wrap">
+<h2>How filing works</h2>
+<p class="sub">Three steps, all online.</p>
+<ol class="steps">
+<li><h3>Create your account and upload</h3><p>Add your W-2s, 1099s and other forms from a phone or computer. Secure identity checks are built in.</p></li>
+<li><h3>Review your free draft</h3><p>You get a draft and summary within 24 hours of a complete submission. Ask questions by chat or book a video call.</p></li>
+<li><h3>Approve and file</h3><p>Pay only when you’re happy. We file, track acceptance and keep your records for next year.</p></li>
+</ol>
+</div></section>
+
+<section id="help"><div class="wrap">
+<h2>Need something specific?</h2>
+<p class="sub">Two situations that come up often.</p>
+<div class="two">
+<div class="panel"><h3>You received an IRS notice</h3><p>Don’t wait on the deadline. We read the letter, tell you what it means and prepare the response.</p>
+<ol><li>Sign in and open a ticket</li><li>Choose “IRS notice”</li><li>Upload the letter</li><li>We respond and keep you updated</li></ol>
+<a class="btn" href="#start">Open a notice ticket</a></div>
+<div class="panel"><h3>You need an ITIN</h3><p>We prepare Form W-7 and certify your identification documents so you don’t have to mail originals.</p>
+<ol><li>Book a short call</li><li>We prepare the W-7</li><li>Certify your IDs</li><li>Submit with your return</li></ol>
+<a class="btn" href="#start">Apply for an ITIN</a></div>
+</div>
+</div></section>
+
+<section id="members"><div class="wrap">
+<h2>What you get with an account</h2>
+<p class="sub">Included for every client, not sold as extras.</p>
+<div class="list">
+<div class="item"><h3>Audit protection</h3><p>If the IRS or a state asks questions about a return we prepared, a specialist helps you respond.</p></div>
+<div class="item"><h3>Ask Senturia</h3><p>An assistant for quick questions on filing status, FBAR, notices and deadlines. It gives general guidance, not personal tax advice.</p></div>
+<div class="item"><h3>Live chat and phone</h3><p>Reach a person without a queue, including evenings and weekends in peak season.</p></div>
+<div class="item"><h3>Video consultations</h3><p>Book time with a tax specialist from home.</p></div>
+<div class="item"><h3>Local CPA access</h3><p>Get matched with a licensed CPA in your state when you need one.</p></div>
+<div class="item"><h3>Knowledge base</h3><p>Guides, state payment instructions, KBA help and short videos on filing and IRS notices.</p></div>
+<div class="item"><h3>Document vault</h3><p>Every return, notice and upload stored by year, ready to download.</p></div>
+<div class="item"><h3>Referral credit</h3><p>Invite a friend. You both get a credit toward your next filing.</p></div>
+<div class="item"><h3>Partner discounts</h3><p>Member pricing from retail and financial partners.</p></div>
+<div class="item"><h3>Professional login</h3><p>A separate workspace for CPAs and preparers who work with us.</p></div>
+</div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+<h2>Common questions</h2>
+<p class="sub">&nbsp;</p>
+<details><summary>Who do you work with?</summary><p>Visa holders, green card holders, students on OPT or CPT, families, freelancers, founders, small businesses and larger companies with multi-state needs.</p></details>
+<details><summary>Do I need to file an FBAR?</summary><p>Generally yes, if the combined highest balance of your foreign accounts went over $10,000 at any point in the year. This includes savings and NRE or NRO accounts.</p></details>
+<details><summary>Can I file as a resident while on an H-1B?</summary><p>It depends on how many days you were in the US and your visa history. We confirm your status before preparing anything.</p></details>
+<details><summary>What if I missed prior years?</summary><p>We can prepare late returns and related filings such as FBAR for earlier years. Start with your most recent year and we’ll work backward.</p></details>
+<details><summary>How is my data protected?</summary><p>Documents are encrypted in transit and at rest, and access to your account requires identity verification.</p></details>
+</div></section>
+
+<section id="start"><div class="wrap">
+<h2>Start with a free draft</h2>
+<p class="sub">Tell us a little about your situation. A specialist will reply within one business day.</p>
+<form id="f">
+<label>Full name<input name="n" required maxlength="120" autocomplete="name"></label>
+<label>Email<input name="e" type="email" required maxlength="160" autocomplete="email"></label>
+<label>Your situation<select name="s"><option>H-1B or L-1</option><option>F-1, OPT or CPT</option><option>Green card or citizen</option><option>Business owner</option><option>Other</option></select></label>
+<label>What do you need?<select name="w"><option>Tax return</option><option>Past-year returns</option><option>ITIN</option><option>FBAR or FATCA</option><option>IRS notice</option><option>Business services</option></select></label>
+<label class="full">Anything we should know<textarea name="m" rows="3"></textarea></label>
+<div class="full"><button class="btn" id="submit-request" type="submit">Request my free draft</button><p class="status" id="request-status" role="status" aria-live="polite"></p></div>
+</form>
+<div class="ok" id="ok" hidden><b>Thanks, we’ve got your request.</b><br>A specialist will reply within one business day.</div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+<div><p><b>Senturiaglobal</b></p><p>Tax, compliance and accounting for individuals and businesses across the US and India.</p><p>© 2026 Senturiaglobal. Information on this site is general and not tax advice.</p></div>
+<nav><a href="#services">Services</a><a href="#faq">FAQ</a><a href="#start">Contact</a><a href="#start">Careers</a><a href="#start">Privacy</a><a href="#start">Terms</a></nav>
+</div></footer>
+
+<dialog id="login">
+<button class="x" id="cl" aria-label="Close">×</button>
+<div id="vin">
+<h2>Sign in to Senturiaglobal</h2>
+<p class="sub">Continue with your Google account. We never see your password.</p>
+<div id="gbox"></div>
+<p class="note" id="gn" role="status" aria-live="polite"></p>
+</div>
+<div id="vout" hidden>
+<h2 id="who"></h2>
+<p class="sub" id="em"></p>
+<button class="btn ghost gbtn" id="so">Sign out</button>
+<p class="note" id="account-status" role="status" aria-live="polite"></p>
+</div>
+</dialog>
+<script>
+var tabs=document.querySelectorAll('.tabs button');
+tabs.forEach(function(b){b.addEventListener('click',function(){
+tabs.forEach(function(x){x.setAttribute('aria-selected',x===b);document.getElementById(x.dataset.t).hidden=x!==b});
+})});
+var root=document.documentElement;
+function setTheme(t){root.setAttribute('data-theme',t);try{localStorage.setItem('sg-theme',t)}catch(e){}}
+try{var st=localStorage.getItem('sg-theme');if(st)root.setAttribute('data-theme',st)}catch(e){}
+document.getElementById('th').addEventListener('click',function(){
+var cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+setTheme(cur==='dark'?'light':'dark')});
+
+var dlg=$('login'),si=$('si'),user=null;
+function $(i){return document.getElementById(i)}
+function render(){
+$('vin').hidden=!!user;$('vout').hidden=!user;
+si.textContent=user?user.name.split(' ')[0]:'Sign in';
+if(user){$('who').textContent=user.name;$('em').textContent=user.email}
+}
+function post(u,d){return fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d||{})})}
+function onCred(r){post('/auth/google',{credential:r.credential}).then(function(x){
+return x.json().then(function(j){if(!x.ok)throw new Error(j.error||'Sign-in failed. Please try again.');return j})})
+.then(function(j){user=j.user;render();dlg.close()}).catch(function(e){$('gn').textContent=e.message||'Sign-in failed. Please try again.'})}
+fetch('/api/me').then(function(r){if(!r.ok)throw new Error('Unable to check your sign-in status.');return r.json()}).then(function(j){user=j.user;render()}).catch(function(){});
+fetch('/api/config').then(function(r){if(!r.ok)throw new Error('Server not reachable.');return r.json()}).then(function(c){
+var clientId=c.googleClientId;
+if(!c.googleLoginEnabled||!clientId){
+$('gn').textContent='Google Sign-In is not configured yet. Add a valid OAuth client ID in .env and restart the app.';
+return;
+}
+var s=document.createElement('script');s.src='https://accounts.google.com/gsi/client';s.async=true;
+s.onload=function(){google.accounts.id.initialize({client_id:clientId,callback:onCred});
+google.accounts.id.renderButton($('gbox'),{theme:'outline',size:'large',text:'continue_with',width:336})};
+s.onerror=function(){$('gn').textContent='Google sign-in could not load. Check your connection.'};
+document.head.appendChild(s)}).catch(function(){$('gn').textContent='Server not reachable.'});
+si.addEventListener('click',function(){render();dlg.showModal()});
+$('cl').addEventListener('click',function(){dlg.close()});
+dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+$('so').addEventListener('click',function(){
+var button=this;button.disabled=true;$('account-status').textContent='';
+post('/auth/logout').then(function(r){if(!r.ok)throw new Error('Sign-out failed. Please try again.');user=null;
+if(window.google&&google.accounts)google.accounts.id.disableAutoSelect();render();dlg.close()
+}).catch(function(e){$('account-status').textContent=e.message||'Sign-out failed. Please try again.'})
+.finally(function(){button.disabled=false})});
+
+$('f').addEventListener('submit',function(e){e.preventDefault();var f=this,d=new FormData(f),button=$('submit-request'),status=$('request-status');
+button.disabled=true;status.className='status';status.textContent='Sending your request…';
+post('/api/requests',{name:d.get('n'),email:d.get('e'),situation:d.get('s'),need:d.get('w'),message:d.get('m')})
+.then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||'We could not send your request. Please try again.');return j})})
+.then(function(){f.hidden=true;$('ok').hidden=false})
+.catch(function(err){status.className='status error';status.textContent=err.message||'We could not send your request. Please check your details and try again.';button.disabled=false})});
+</script>
+</body>
+</html>
