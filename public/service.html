@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8f8f6">
+<title>Service | Senturiaglobal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#f8f8f6;--surface:#fff;--ink:#16202a;--mute:#5b6773;--line:#dde0e3;--accent:#0e5e63;--accent-ink:#fff;font:400 16px/1.6 "Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#12171c;--surface:#1a2127;--ink:#e8ebed;--mute:#9aa5ae;--line:#2b343b;--accent:#5cb8bd;--accent-ink:#0b1417}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink)}a{color:inherit}.wrap{width:min(1040px,100% - 40px);margin:auto}
+header{border-bottom:1px solid var(--line)}header .wrap{height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:18px;font-weight:700;text-decoration:none}.back{color:var(--mute);text-decoration:none}.back:hover{color:var(--ink)}
+.hero{padding:76px 0 56px}.eyebrow{color:var(--accent);font-size:14px;font-weight:600;margin:0 0 12px}
+h1{font-size:clamp(36px,6vw,58px);line-height:1.08;letter-spacing:-.03em;margin:0 0 20px;max-width:16em}
+.lead{font-size:20px;color:var(--mute);max-width:42em;margin:0 0 28px}
+.actions{display:flex;gap:12px;flex-wrap:wrap}.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:11px 18px;text-decoration:none;font-weight:600}.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+section{padding:36px 0 56px;border-top:1px solid var(--line)}h2{font-size:28px;line-height:1.2;margin:0 0 20px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:24px}
+.card h3{font-size:18px;margin:0 0 10px}.card p{margin:0;color:var(--mute)}ul{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+li{position:relative;padding-left:28px;color:var(--mute)}li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:700}
+.notice{color:var(--mute);font-size:14px;margin:22px 0 0}.related{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.related a{padding:15px;border:1px solid var(--line);border-radius:8px;background:var(--surface);text-decoration:none}.related a:hover{border-color:var(--accent)}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mute);font-size:14px}
+[hidden]{display:none!important}
+@media(max-width:640px){.hero{padding:50px 0 40px}.grid{grid-template-columns:1fr}.wrap{width:min(100% - 32px,1040px)}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="logo" href="/">Senturiaglobal</a><a class="back" href="/#services">← All services</a></div></header>
+<main class="wrap" id="content" hidden>
+<section class="hero" style="border:0">
+<p class="eyebrow" id="category"></p>
+<h1 id="title"></h1>
+<p class="lead" id="description"></p>
+<div class="actions"><a class="btn" id="request" href="/">Request a consultation</a><a class="btn ghost" href="/#services">Explore all services</a></div>
+</section>
+<section>
+<div class="grid">
+<article class="card"><h2>How we can help</h2><p id="detail"></p></article>
+<article class="card"><h2>What to expect</h2><ul id="includes"></ul></article>
+</div>
+<p class="notice">Services are subject to eligibility and a review of your circumstances. Website information is general and is not tax, legal, or financial advice.</p>
+</section>
+<section><h2>Explore related services</h2><div class="related" id="related"></div><p class="notice" id="related-error" role="status" aria-live="polite"></p></section>
+</main>
+<main class="wrap" id="error" hidden><section class="hero"><h1>Service unavailable</h1><p class="lead">We couldn’t load this service. Browse all services or try again shortly.</p><a class="btn" href="/#services">Browse services</a></section></main>
+<footer><div class="wrap">© 2026 Senturiaglobal · Information on this site is general and not tax advice.</div></footer>
+<script>
+var slug=window.location.pathname.split('/').filter(Boolean).pop();
+function addText(tag,text,parent){var element=document.createElement(tag);element.textContent=text;parent.appendChild(element);return element}
+fetch('/api/services/'+encodeURIComponent(slug)).then(function(response){
+if(!response.ok)throw new Error('Unable to load service');
+return response.json()
+}).then(function(service){
+document.title=service.title+' | Senturiaglobal';
+document.getElementById('content').hidden=false;
+document.getElementById('category').textContent=service.category==='ind'?'Individual service':service.category==='biz'?'Business service':'Enterprise service';
+document.getElementById('title').textContent=service.title;
+document.getElementById('description').textContent=service.short;
+document.getElementById('detail').textContent=service.description;
+document.getElementById('request').href='/?service='+encodeURIComponent(service.slug)+'#start';
+var includes=document.getElementById('includes');
+service.includes.forEach(function(item){addText('li',item,includes)});
+fetch('/api/services').then(function(response){if(!response.ok)throw new Error('Unable to load related services');return response.json()})
+.then(function(services){services.filter(function(item){return item.category===service.category&&item.slug!==service.slug}).slice(0,4).forEach(function(item){
+var link=addText('a',item.title,document.getElementById('related'));link.href='/services/'+encodeURIComponent(item.slug)
+})}).catch(function(){document.getElementById('related-error').textContent='Related services could not be loaded. Browse all services instead.'});
+}).catch(function(){document.getElementById('error').hidden=false});
+</script>
+</body>
+</html>

@@ -40,6 +40,8 @@ h2{font-size:30px;letter-spacing:-.02em;line-height:1.2;margin:0 0 10px;font-wei
 .item{padding:18px 0;border-bottom:1px solid var(--line)}
 .item h3{margin:0 0 4px;font-size:17px;font-weight:600}
 .item p{margin:0;color:var(--mute);font-size:15px}
+.item a{text-decoration:none}
+.item a:hover h3{color:var(--accent)}
 [hidden]{display:none!important}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin:0;padding:0;list-style:none;counter-reset:s}
 .steps li{counter-increment:s}
@@ -112,32 +114,9 @@ button:disabled{opacity:.65;cursor:wait}
 <button role="tab" aria-selected="false" data-t="biz">Businesses</button>
 <button role="tab" aria-selected="false" data-t="ent">Enterprise</button>
 </div>
-<div class="list" id="ind">
-<div class="item"><h3>Tax return preparation</h3><p>Federal and state returns for residents (1040) and non-residents (1040-NR), with a draft to review before filing.</p></div>
-<div class="item"><h3>E-filing</h3><p>Electronic filing where you’re eligible, with status updates until the return is accepted.</p></div>
-<div class="item"><h3>Past-year returns</h3><p>Catch up on up to three prior years if returns were missed or filed incorrectly.</p></div>
-<div class="item"><h3>Tax planning and advisory</h3><p>Year-round planning for withholding, W-4 changes, residency status, treaty benefits and retirement.</p></div>
-<div class="item"><h3>ITIN and Form W-7</h3><p>Application support from a Certifying Acceptance Agent, so you can keep your original ID documents.</p></div>
-<div class="item"><h3>FBAR and FATCA</h3><p>Reporting for foreign accounts and assets, including filings for earlier years.</p></div>
-<div class="item"><h3>Extensions</h3><p>Federal and state extensions to avoid late-filing penalties while you gather documents.</p></div>
-<div class="item"><h3>IRS representation</h3><p>Responses to notices, audit letters and follow-up questions, with multi-year support.</p></div>
-</div>
-<div class="list" id="biz" hidden>
-<div class="item"><h3>Business incorporation</h3><p>LLC, S-corp and C-corp setup with structure advice from day one.</p></div>
-<div class="item"><h3>Bookkeeping and accounting</h3><p>Monthly books, reconciliations and clear financial reports.</p></div>
-<div class="item"><h3>Payroll</h3><p>Payroll runs, correct withholding, deposits and quarterly filings.</p></div>
-<div class="item"><h3>Business tax returns</h3><p>Returns for LLCs, S-corps, partnerships and corporations, with projections before year end.</p></div>
-<div class="item"><h3>Entity planning</h3><p>Review of your structure as income, owners or states change.</p></div>
-<div class="item"><h3>Notice management</h3><p>Tracking and responding to notices from federal and state agencies.</p></div>
-</div>
-<div class="list" id="ent" hidden>
-<div class="item"><h3>Income tax</h3><p>Federal, state and international compliance and consulting.</p></div>
-<div class="item"><h3>Sales and use, and indirect tax</h3><p>Return preparation, e-filing and reconciliation across jurisdictions.</p></div>
-<div class="item"><h3>Property tax</h3><p>Bill verification, payment administration, refund processing and assessment notice tracking.</p></div>
-<div class="item"><h3>Employment tax</h3><p>Payroll tax compliance, credits and incentives.</p></div>
-<div class="item"><h3>Unclaimed property and transfer pricing</h3><p>Reporting, documentation and ongoing compliance.</p></div>
-<div class="item"><h3>Managed services</h3><p>An outsourced team that runs recurring filings and reports through a client portal.</p></div>
-</div>
+<div class="list" id="ind"></div>
+<div class="list" id="biz" hidden></div>
+<div class="list" id="ent" hidden></div>
 </div></section>
 
 <section id="process"><div class="wrap">
@@ -197,7 +176,7 @@ button:disabled{opacity:.65;cursor:wait}
 <label>Full name<input name="n" required maxlength="120" autocomplete="name"></label>
 <label>Email<input name="e" type="email" required maxlength="160" autocomplete="email"></label>
 <label>Your situation<select name="s"><option>H-1B or L-1</option><option>F-1, OPT or CPT</option><option>Green card or citizen</option><option>Business owner</option><option>Other</option></select></label>
-<label>What do you need?<select name="w"><option>Tax return</option><option>Past-year returns</option><option>ITIN</option><option>FBAR or FATCA</option><option>IRS notice</option><option>Business services</option></select></label>
+<label>What do you need?<select name="w" id="request-service"><option value="">Choose a service</option></select></label>
 <label class="full">Anything we should know<textarea name="m" rows="3"></textarea></label>
 <div class="full"><button class="btn" id="submit-request" type="submit">Request my free draft</button><p class="status" id="request-status" role="status" aria-live="polite"></p></div>
 </form>
@@ -226,6 +205,27 @@ button:disabled{opacity:.65;cursor:wait}
 </div>
 </dialog>
 <script>
+var serviceCatalog=[];
+function fillServices(){
+serviceCatalog.forEach(function(service){
+var card=document.createElement('article');card.className='item';
+var link=document.createElement('a');link.href='/services/'+encodeURIComponent(service.slug);
+var title=document.createElement('h3');title.textContent=service.title;
+var description=document.createElement('p');description.textContent=service.short;
+link.appendChild(title);link.appendChild(description);card.appendChild(link);
+document.getElementById(service.category).appendChild(card);
+var option=document.createElement('option');option.value=service.title;option.textContent=service.title;
+document.getElementById('request-service').appendChild(option)
+});
+var requestedService=new URLSearchParams(window.location.search).get('service');
+if(requestedService){
+var service=serviceCatalog.find(function(item){return item.slug===requestedService});
+if(service)document.getElementById('request-service').value=service.title
+}
+}
+fetch('/api/services').then(function(response){if(!response.ok)throw new Error('Unable to load services');return response.json()})
+.then(function(services){serviceCatalog=services;fillServices()})
+.catch(function(){document.querySelector('#services .sub').textContent='Services could not be loaded. Please refresh the page or contact us.'});
 var tabs=document.querySelectorAll('.tabs button');
 tabs.forEach(function(b){b.addEventListener('click',function(){
 tabs.forEach(function(x){x.setAttribute('aria-selected',x===b);document.getElementById(x.dataset.t).hidden=x!==b});

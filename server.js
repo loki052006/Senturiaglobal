@@ -2,6 +2,7 @@ import express from 'express';
 import cookieSession from 'cookie-session';
 import { OAuth2Client } from 'google-auth-library';
 import Database from 'better-sqlite3';
+import { services } from './services.js';
 
 const { GOOGLE_CLIENT_ID = '', SESSION_SECRET, PORT = 3000, NODE_ENV } = process.env;
 if (!SESSION_SECRET) {
@@ -60,7 +61,20 @@ app.get('/api/config', (req, res) => res.json({
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
+app.get('/api/services', (req, res) => res.json(services));
+
+app.get('/api/services/:slug', (req, res) => {
+  const service = services.find(item => item.slug === req.params.slug);
+  if (!service) return res.status(404).json({ error: 'Service not found' });
+  res.json(service);
+});
+
 app.get('/api/me', (req, res) => res.json({ user: getUser(req.session?.sub) || null }));
+
+app.get('/services/:slug', (req, res, next) => {
+  if (!services.some(item => item.slug === req.params.slug)) return next();
+  res.sendFile('service.html', { root: 'public' });
+});
 
 app.post('/auth/google', limit, async (req, res) => {
   if (!google) return res.status(503).json({ error: 'Google Sign-In is not configured on this server.' });

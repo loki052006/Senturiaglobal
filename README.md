@@ -20,5 +20,8 @@ Set `SESSION_SECRET` to a long random value in `.env` before running, and set `G
 Open http://localhost:3000. Users and intake requests are stored in `senturia.db`.
 For production: serve over HTTPS with NODE_ENV=production.
 
+## Service pages
+The Services section is generated from `services.js`. Each individual, business, and enterprise offering has its own `/services/<slug>` detail page, with a link to the intake form preselected for that service. These pages describe service options; they do not themselves file tax returns, process payroll, or provide an authenticated document portal.
+
 ## Deploy to Render
 Connect the project repository to Render and use the included `render.yaml` blueprint. Set `GOOGLE_CLIENT_ID` in the Render environment, then add the deployed HTTPS URL to the OAuth client's Authorized JavaScript origins. Render's free web service has an ephemeral filesystem: SQLite requests can be lost on restart or redeploy. Use a paid persistent disk or a managed database before relying on production submissions.
